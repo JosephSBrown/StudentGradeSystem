@@ -12,7 +12,8 @@ namespace StudentGradeSystem
 			Console.WriteLine("Please Choose an Option: ");
 			Console.WriteLine("1. Create a Student");
 			Console.WriteLine("2. View an Existing Student");
-			Console.WriteLine("3. Exit Program");
+			Console.WriteLine("3. Add Grade to Existing Student");
+			Console.WriteLine("4. Exit Program");
 
 			ConsoleKeyInfo key = Console.ReadKey(true);
 
@@ -28,6 +29,10 @@ namespace StudentGradeSystem
 					return true;
 				case ConsoleKey.NumPad3:
 				case ConsoleKey.D3:
+
+					return true;
+				case ConsoleKey.NumPad4:
+				case ConsoleKey.D4:
 					exit();
 					return true;
 				default:
@@ -54,11 +59,21 @@ namespace StudentGradeSystem
 
 			foreach (KeyValuePair<int, Dictionary<string, string>> sid in student.students) //sid is reference to an abbreviated version of student id
 			{
-				try
+				bool match = true;
+				while (match)
 				{
 					Random rnum = new Random();
-					int num = rnum.Next(1, 5);
-					student.StudentId = num;
+					int num = rnum.Next(1, 10);
+					Console.WriteLine(num);
+					if (sid.Key != num)
+					{
+						student.StudentId = num;
+						match = false;
+					}
+					else
+					{
+						match = true;
+					}
 				}
 			}
 
@@ -89,7 +104,7 @@ namespace StudentGradeSystem
             Console.Clear();
             foreach (KeyValuePair <int, Dictionary<string, string>> sid in student.students) //sid is reference to an abbreviated version of student id
 			{
-                Console.WriteLine($"{sid.Key}");
+                Console.Write(@$"{sid.Key}");
 				foreach (KeyValuePair<string, string> detail in sid.Value) //detail is reference to personal details kept within the nested dictionary
 				{
 					if (detail.Key == "Name") //if the key value in the nested dictionary is exactly equal to "Name" write it within the console
@@ -98,7 +113,7 @@ namespace StudentGradeSystem
 					}
 					else if (detail.Key == "Course") //if the key value in the nested dictionary is exactly equal to "Course" write it within the console
 					{
-						Console.Write($" | Course: {detail.Value}");
+						Console.WriteLine($" | Course: {detail.Value}");
 					}
 				}
 
