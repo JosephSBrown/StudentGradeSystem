@@ -5,7 +5,7 @@ namespace StudentGradeSystem
 {
 	class MainMenu
 	{
-		public bool menu(Student student)
+		public bool menu(Student student, Grade grade)
 		{
 			Console.Clear();
 			Console.WriteLine("----Welcome to the Student Directory----");
@@ -21,15 +21,15 @@ namespace StudentGradeSystem
 			{
 				case ConsoleKey.NumPad1:
 				case ConsoleKey.D1:
-					createStudent(student);
+					createStudent(student, grade);
 					return true;
 				case ConsoleKey.NumPad2:
 				case ConsoleKey.D2:
-					viewStudent(student);
+					viewStudent(student, grade);
 					return true;
 				case ConsoleKey.NumPad3:
 				case ConsoleKey.D3:
-
+					grade.createGrade();
 					return true;
 				case ConsoleKey.NumPad4:
 				case ConsoleKey.D4:
@@ -46,7 +46,24 @@ namespace StudentGradeSystem
 			Environment.Exit(0);
 		}
 
-		public void createStudent(Student student)
+		public void menuinteractivity()
+		{
+
+			Console.WriteLine("Press Enter to Continue...");
+
+			//On Page Interactivity = Going back to the previous menu
+			ConsoleKeyInfo key = Console.ReadKey();
+
+			switch (key.Key)
+			{
+				case ConsoleKey.Enter:
+					return;
+				default:
+					return;
+			}
+		}
+
+		public void createStudent(Student student, Grade grade)
 		{
 			Console.Clear(); //clears the menu to begin the function
 			Console.WriteLine("----Create A New Student----"); //page header
@@ -63,12 +80,17 @@ namespace StudentGradeSystem
 				while (match)
 				{
 					Random rnum = new Random();
-					int num = rnum.Next(1, 10);
+					int num = rnum.Next(100000, 999999);
 					Console.WriteLine(num);
 					if (sid.Key != num)
 					{
 						student.StudentId = num;
 						match = false;
+					}
+					else if (sid.Key == num)
+					{
+						Console.WriteLine("There Was An Error Generating Student ID, Please Try Again...");
+						return;
 					}
 					else
 					{
@@ -84,22 +106,11 @@ namespace StudentGradeSystem
 			details.Add("Course", student.Course);
 			student.students.Add(student.StudentId, details);
 
-			Console.WriteLine("Press Enter to Continue...");
-
-			//On Page Interactivity = Going back to the previous menu
-			ConsoleKeyInfo key = Console.ReadKey();
-
-			switch (key.Key)
-			{
-				case ConsoleKey.Enter:
-					return;
-				default:
-					return;
-			}
+			menuinteractivity();
 
 		}
 
-        public void viewStudent(Student student)
+        public void viewStudent(Student student, Grade grade)
         {
             Console.Clear();
             foreach (KeyValuePair <int, Dictionary<string, string>> sid in student.students) //sid is reference to an abbreviated version of student id
@@ -116,8 +127,7 @@ namespace StudentGradeSystem
 						Console.WriteLine($" | Course: {detail.Value}");
 					}
 				}
-
-            }
+			}
 
 			//On Page Interactivity = Going back to the previous menu
 			Console.WriteLine("Press Escape to Go Back...");

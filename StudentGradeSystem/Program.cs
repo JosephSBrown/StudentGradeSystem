@@ -8,11 +8,12 @@ namespace StudentGradeSystem
         {
             bool showmenu = true;
             Student student = new Student();
+            Grade grade = new Grade();
             MainMenu mm = new MainMenu();
 
             while (showmenu)
             {
-                showmenu = mm.menu(student);
+                showmenu = mm.menu(student, grade);
             }
         }
     }
