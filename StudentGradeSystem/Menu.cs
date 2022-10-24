@@ -113,6 +113,7 @@ namespace StudentGradeSystem
         public void viewStudent(Student student, Grade grade)
         {
             Console.Clear();
+
             foreach (KeyValuePair <int, Dictionary<string, string>> sid in student.students) //sid is reference to an abbreviated version of student id
 			{
                 Console.Write(@$"{sid.Key}");
@@ -142,7 +143,7 @@ namespace StudentGradeSystem
 					return;
 			}
 
-        }
+		}
 
     }
 }

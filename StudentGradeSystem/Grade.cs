@@ -49,7 +49,8 @@ If This is Correct, Please Press Enter To Continue, To Start Again, Please Press
                 case ConsoleKey.Enter:
                     addGrade(grades, studentid, year, module, assignment, mark, weight);
                     Console.WriteLine("Student's Grade Added... ");
-                    Thread.Sleep(2000);
+                    selectAllGrades();
+                    Thread.Sleep(20000);
                     return;
                 case ConsoleKey.Escape:
                     return;
@@ -79,8 +80,9 @@ If This is Correct, Please Press Enter To Continue, To Start Again, Please Press
 
         }
 
-        public void test()
+        public void selectAllGrades()
         {
+            Console.WriteLine("Year | Module       | Element | Mark | Weight");
             foreach (KeyValuePair<int, Dictionary<int, Dictionary<int, Dictionary<string, Dictionary<int, Dictionary<string, int>>>>>> i in grades)
             {
                 foreach (KeyValuePair<int, Dictionary<int, Dictionary<string, Dictionary<int, Dictionary<string, int>>>>> sid in i.Value)
@@ -93,12 +95,15 @@ If This is Correct, Please Press Enter To Continue, To Start Again, Please Press
                             { 
                                 foreach (KeyValuePair<string, int> type in element.Value)
                                 {
-                                    Console.Write($@"Student Grade Profile:
-
-Student ID: {sid.Key}
-Completion Year: {yr.Key}
-Module Title: {mod.Key}
-Assignment Number: {element.Key}");
+                                    Console.Write($"{yr.Key} | {mod.Key} | {element.Key} | ");
+                                    if (type.Key == "Mark")
+                                    {
+                                        Console.Write($"{type.Value} | ");
+                                    }
+                                    else if (type.Key == "Weight")
+                                    {
+                                        Console.WriteLine($"{type.Value}");
+                                    }
                                 }
                             }
                         }
