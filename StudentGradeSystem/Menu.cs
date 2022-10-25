@@ -6,7 +6,7 @@ namespace StudentGradeSystem
 {
 	class MainMenu
 	{
-		public bool menu(Student student, Grade grade)
+		public bool menu(Student student, Grade grade, gradeProfile gp)
 		{
 			Console.Clear();
 			Console.WriteLine("----Welcome to the Student Directory----");
@@ -26,7 +26,7 @@ namespace StudentGradeSystem
 					return true;
 				case ConsoleKey.NumPad2:
 				case ConsoleKey.D2:
-					viewStudent(student, grade);
+					viewStudents(student, grade);
 					return true;
 				case ConsoleKey.NumPad3:
 				case ConsoleKey.D3:
@@ -35,6 +35,10 @@ namespace StudentGradeSystem
 				case ConsoleKey.NumPad4:
 				case ConsoleKey.D4:
 					exit();
+					return true;
+				case ConsoleKey.NumPad5:
+				case ConsoleKey.D5:
+					gp.calcAvg(grade);
 					return true;
 				default:
 					return true;
@@ -82,7 +86,6 @@ namespace StudentGradeSystem
 				{
 					Random rnum = new Random();
 					int num = rnum.Next(100000, 999999);
-					Console.WriteLine(num);
 					if (sid.Key != num)
 					{
 						student.StudentId = num;
@@ -111,7 +114,7 @@ namespace StudentGradeSystem
 
 		}
 
-        public void viewStudent(Student student, Grade grade)
+        public void viewStudents(Student student, Grade grade)
         {
             Console.Clear();
 
@@ -192,6 +195,7 @@ namespace StudentGradeSystem
 			switch (key.Key)
 			{
 				case ConsoleKey.Enter:
+					grade.displayStudentsGrades(student);
 					return;
 				case ConsoleKey.Escape:
 					return;
@@ -200,6 +204,5 @@ namespace StudentGradeSystem
 			}
 
 		}
-
     }
 }

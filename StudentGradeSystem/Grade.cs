@@ -50,7 +50,7 @@ If This is Correct, Please Press Enter To Continue, To Start Again, Please Press
                 case ConsoleKey.Enter:
                     addGrade(grades, studentid, year, module, assignment, mark, weight);
                     Console.WriteLine("Student's Grade Added... ");
-                    displayGrades();
+                    Thread.Sleep(2000);
                     return;
                 case ConsoleKey.Escape:
                     return;
@@ -80,7 +80,7 @@ If This is Correct, Please Press Enter To Continue, To Start Again, Please Press
 
         }
 
-        public void displayGrades()
+        public void displayStudentsGrades(Student student)
         {
             DataTable gradet = new DataTable("Grades");
             DataColumn column;
@@ -139,6 +139,30 @@ If This is Correct, Please Press Enter To Continue, To Start Again, Please Press
             Console.Write("Please Enter Student ID: ");
             int stuid = Convert.ToInt32(Console.ReadLine());
 
+            Console.Clear();
+
+            foreach (KeyValuePair<int, Dictionary<string, string>> sid in student.students) //sid is reference to an abbreviated version of student id
+            {
+                var check = new Dictionary<int, Dictionary<string, string>> { { sid.Key, sid.Value } };
+                if (check.ContainsKey(stuid))
+                {
+                    Console.WriteLine($"Student ID: {sid.Key}");
+                    foreach (KeyValuePair<string, string> detail in sid.Value) //detail is reference to personal details kept within the nested dictionary
+                    {
+                        if (detail.Key == "Name") //if the key value in the nested dictionary is exactly equal to "Name" write it within the console
+                        {
+                            Console.WriteLine($"Name: {detail.Value}");
+                        }
+                        else if (detail.Key == "Course") //if the key value in the nested dictionary is exactly equal to "Course" write it within the console
+                        {
+                            Console.WriteLine(@$"Course: {detail.Value}
+
+");
+                        }
+                    }
+                }
+            }
+
             foreach (KeyValuePair<int, Dictionary<int, Dictionary<int, Dictionary<string, Dictionary<int, Dictionary<string, int>>>>>> i in grades)
             {
                 row = gradet.NewRow();
@@ -194,7 +218,7 @@ If This is Correct, Please Press Enter To Continue, To Start Again, Please Press
 
 
             ConsoleKeyInfo key = Console.ReadKey();
-            Console.Write("Pres Enter To Coninue...");
+            Console.Write("Press Enter To Continue...");
 
             switch (key.Key)
             {
