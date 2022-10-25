@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Linq;
+using System.Data;
 
 namespace StudentGradeSystem
 {
@@ -15,7 +16,7 @@ namespace StudentGradeSystem
         public int mark;
         public int weight;
         int NextIndex = 0;
-
+        
         public void createGrade()
         {
             Console.Clear();
@@ -49,8 +50,7 @@ If This is Correct, Please Press Enter To Continue, To Start Again, Please Press
                 case ConsoleKey.Enter:
                     addGrade(grades, studentid, year, module, assignment, mark, weight);
                     Console.WriteLine("Student's Grade Added... ");
-                    selectGrades();
-                    Thread.Sleep(20000);
+                    displayGrades();
                     return;
                 case ConsoleKey.Escape:
                     return;
@@ -80,39 +80,130 @@ If This is Correct, Please Press Enter To Continue, To Start Again, Please Press
 
         }
 
-        public void selectGrades()
+        public void displayGrades()
         {
-            Console.WriteLine("Year | Module       | Element | Mark | Weight");
+            DataTable gradet = new DataTable("Grades");
+            DataColumn column;
+            DataRow row;
+
+            //Year
+            column = new DataColumn();
+            column.DataType = typeof(int);
+            column.ColumnName = "Year";
+            column.Caption = "Year";
+            column.AutoIncrement = false;
+            column.ReadOnly = true;
+            column.Unique = false;
+            gradet.Columns.Add(column);
+
+            //Module
+            column = new DataColumn();
+            column.DataType = typeof(string);
+            column.ColumnName = "Module";
+            column.Caption = "Module";
+            column.AutoIncrement = false;
+            column.ReadOnly = true;
+            column.Unique = false;
+            gradet.Columns.Add(column);
+
+            //Element
+            column = new DataColumn();
+            column.DataType = typeof(int);
+            column.ColumnName = "Element";
+            column.Caption = "Element";
+            column.AutoIncrement = false;
+            column.ReadOnly = true;
+            column.Unique = false;
+            gradet.Columns.Add(column);
+
+            //Mark
+            column = new DataColumn();
+            column.DataType = typeof(int);
+            column.ColumnName = "Mark";
+            column.Caption = "Mark";
+            column.AutoIncrement = false;
+            column.ReadOnly = true;
+            column.Unique = false;
+            gradet.Columns.Add(column);
+
+            //Weight
+            column = new DataColumn();
+            column.DataType = typeof(float);
+            column.ColumnName = "Weight";
+            column.Caption = "Weight";
+            column.AutoIncrement = false;
+            column.ReadOnly = true;
+            column.Unique = false;
+            gradet.Columns.Add(column);
+
+            Console.Write("Please Enter Student ID: ");
+            int stuid = Convert.ToInt32(Console.ReadLine());
+
             foreach (KeyValuePair<int, Dictionary<int, Dictionary<int, Dictionary<string, Dictionary<int, Dictionary<string, int>>>>>> i in grades)
             {
+                row = gradet.NewRow();
                 foreach (KeyValuePair<int, Dictionary<int, Dictionary<string, Dictionary<int, Dictionary<string, int>>>>> sid in i.Value)
                 {
-                    foreach (KeyValuePair<int, Dictionary<string, Dictionary<int, Dictionary<string, int>>>> yr in sid.Value)
-                    {
-                        Console.Write($"{yr.Key} | ");
-                        foreach (KeyValuePair<string, Dictionary<int, Dictionary<string, int>>> mod in yr.Value)
+                    var check = new Dictionary<int, Dictionary<int, Dictionary<string, Dictionary<int, Dictionary<string, int>>>>> { { sid.Key, sid.Value} };
+                    if (check.ContainsKey(stuid))
+                    { 
+                        foreach (KeyValuePair<int, Dictionary<string, Dictionary<int, Dictionary<string, int>>>> yr in sid.Value)
                         {
-                            Console.Write($"{mod.Key} | ");
-                            foreach (KeyValuePair<int, Dictionary<string, int>> element in mod.Value)
+                        row["Year"] = yr.Key;
+                            foreach (KeyValuePair<string, Dictionary<int, Dictionary<string, int>>> mod in yr.Value)
                             {
-                                Console.Write($"{element.Key} | ");
-                                foreach (KeyValuePair<string, int> type in element.Value)
+                                row["Module"] = mod.Key;
+                                foreach (KeyValuePair<int, Dictionary<string, int>> element in mod.Value)
                                 {
-                                    if (type.Key == "Mark")
+                                    row["Element"] = element.Key;
+                                    foreach (KeyValuePair<string, int> type in element.Value)
                                     {
-                                        Console.Write($"{type.Value} | ");
-                                    }
-                                    else if (type.Key == "Weight")
-                                    {
-                                        Console.WriteLine($"{type.Value}%");
+                                        if (type.Key == "Mark")
+                                        {
+                                            row["Mark"] = type.Value;
+                                        }
+                                        else if (type.Key == "Weight")
+                                        {
+                                            row["Weight"] = (float)type.Value / 100;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    
                 }
+                gradet.Rows.Add(row);
             }
-        }
 
+            foreach (DataColumn col in gradet.Columns)
+            {
+                Console.Write("{0,-14}", col.ColumnName);
+            }
+            Console.WriteLine();
+
+            foreach (DataRow r in gradet.Rows)
+            {
+                foreach (DataColumn col in gradet.Columns)
+                {
+                    Console.Write("{0,-14}", r[col]);
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+
+
+            ConsoleKeyInfo key = Console.ReadKey();
+            Console.Write("Pres Enter To Coninue...");
+
+            switch (key.Key)
+            {
+                case ConsoleKey.Enter:
+                    return;
+                default:
+                    return;
+            }
+
+        }
     }
 }

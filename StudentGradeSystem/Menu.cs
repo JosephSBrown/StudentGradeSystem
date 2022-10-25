@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace StudentGradeSystem
 {
@@ -114,29 +115,84 @@ namespace StudentGradeSystem
         {
             Console.Clear();
 
-            foreach (KeyValuePair <int, Dictionary<string, string>> sid in student.students) //sid is reference to an abbreviated version of student id
+			DataTable studentt = new DataTable("Students");
+			DataColumn column;
+			DataRow row;
+
+			//Column for StudentID
+			column = new DataColumn();
+			column.DataType = typeof(int);
+			column.ColumnName = "StudentID";
+			column.Caption = "StudentID";
+			column.AutoIncrement = false;
+			column.ReadOnly = false;
+			column.Unique = false;
+			studentt.Columns.Add(column);
+
+			//Column for Student Name
+			column = new DataColumn();
+			column.DataType = typeof(string);
+			column.ColumnName = "Name";
+			column.Caption = "Name";
+			column.AutoIncrement = false;
+			column.ReadOnly = false;
+			column.Unique = false;
+			studentt.Columns.Add(column);
+
+			//Column for Course
+			column = new DataColumn();
+			column.DataType = typeof(string);
+			column.ColumnName = "Course";
+			column.Caption = "Course";
+			column.AutoIncrement = false;
+			column.ReadOnly = false;
+			column.Unique = false;
+			studentt.Columns.Add(column);
+
+			foreach (KeyValuePair <int, Dictionary<string, string>> sid in student.students) //sid is reference to an abbreviated version of student id
 			{
-                Console.Write(@$"{sid.Key}");
+				row = studentt.NewRow();
+				row["StudentID"] = sid.Key;
 				foreach (KeyValuePair<string, string> detail in sid.Value) //detail is reference to personal details kept within the nested dictionary
 				{
 					if (detail.Key == "Name") //if the key value in the nested dictionary is exactly equal to "Name" write it within the console
 					{
-						Console.Write($" | Name: {detail.Value}");
+						row["Name"] = detail.Value;
 					}
 					else if (detail.Key == "Course") //if the key value in the nested dictionary is exactly equal to "Course" write it within the console
 					{
-						Console.WriteLine($" | Course: {detail.Value}");
+						row["Course"] = detail.Value;
 					}
 				}
+				studentt.Rows.Add(row);
 			}
 
+			foreach (DataColumn col in studentt.Columns)
+			{
+				Console.Write("{0,-14}", col.ColumnName);
+			}
+			Console.WriteLine();
+
+			foreach (DataRow r in studentt.Rows)
+			{
+				foreach (DataColumn col in studentt.Columns)
+				{
+					Console.Write("{0,-14}", r[col]);
+				}
+				Console.WriteLine();
+			}
+			Console.WriteLine();
+
 			//On Page Interactivity = Going back to the previous menu
+			Console.WriteLine("Press Enter to Search and Go to a Student's Profile...");
 			Console.WriteLine("Press Escape to Go Back...");
 
 			ConsoleKeyInfo key = Console.ReadKey();
 
 			switch (key.Key)
 			{
+				case ConsoleKey.Enter:
+					return;
 				case ConsoleKey.Escape:
 					return;
 				default:
