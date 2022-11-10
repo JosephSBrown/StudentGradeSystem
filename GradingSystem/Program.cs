@@ -6,8 +6,13 @@ namespace GradingSystem
     {
         static void Main(string[] args)
         {
+            bool showmenu = true;
             App app = new App();
-            app.menu();
+
+            while (showmenu)
+            {
+                showmenu = app.menu();
+            }
         }
     }
 }
