@@ -1,0 +1,14 @@
+D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.csproj.AssemblyReference.cache
+D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.GeneratedMSBuildEditorConfig.editorconfig
+D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.AssemblyInfoInputs.cache
+D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.AssemblyInfo.cs
+D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.csproj.CoreCompileInputs.cache
+D:\University Year 2\OOP\GradingSystem\GradingSystem\bin\Debug\netcoreapp3.1\GradingSystem.exe
+D:\University Year 2\OOP\GradingSystem\GradingSystem\bin\Debug\netcoreapp3.1\GradingSystem.deps.json
+D:\University Year 2\OOP\GradingSystem\GradingSystem\bin\Debug\netcoreapp3.1\GradingSystem.runtimeconfig.json
+D:\University Year 2\OOP\GradingSystem\GradingSystem\bin\Debug\netcoreapp3.1\GradingSystem.runtimeconfig.dev.json
+D:\University Year 2\OOP\GradingSystem\GradingSystem\bin\Debug\netcoreapp3.1\GradingSystem.dll
+D:\University Year 2\OOP\GradingSystem\GradingSystem\bin\Debug\netcoreapp3.1\GradingSystem.pdb
+D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.dll
+D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.pdb
+D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.genruntimeconfig.cache
