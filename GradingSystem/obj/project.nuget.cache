@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "rSg6FD/ANPgNuGGNmeR+sizJtLnNh4OiD3/GuE98Nb6tq3vh8uXqQFev1NveHnlQ6Ftfo7UtFNcpNoasxC8TMA==",
+  "dgSpecHash": "6oWXBYRm0DlTOITDNh9Hnw0gpvB/OIAREtnFcCZU+ZNYaEozTrNC3gAuKHcTqfiS4GJ67Jhq+bQh1rf0J4QjXw==",
   "success": true,
   "projectFilePath": "D:\\University Year 2\\OOP\\GradingSystem\\GradingSystem\\GradingSystem.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Joseph\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -12,3 +12,5 @@ D:\University Year 2\OOP\GradingSystem\GradingSystem\bin\Debug\netcoreapp3.1\Gra
 D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.dll
 D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.pdb
 D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.genruntimeconfig.cache
+D:\University Year 2\OOP\GradingSystem\GradingSystem\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\University Year 2\OOP\GradingSystem\GradingSystem\obj\Debug\netcoreapp3.1\GradingSystem.csproj.CopyComplete
