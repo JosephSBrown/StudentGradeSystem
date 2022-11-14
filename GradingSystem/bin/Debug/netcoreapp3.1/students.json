@@ -1,1 +1,20 @@
-"{\r\n  \"123\": {\r\n    \"Grading\": {\r\n      \"Grades\": []\r\n    },\r\n    \"StudentID\": 123,\r\n    \"Name\": \"Joseph\",\r\n    \"Course\": \"Computing\",\r\n    \"EnrolmentYear\": 2021,\r\n    \"CurrentYearOfStudy\": 2\r\n  }\r\n}"
+{
+  "12345": {
+    "Grading": {
+      "Grades": [
+        {
+          "Year": 2021,
+          "Module": "2",
+          "Assignment": 10,
+          "Mark": 70.0,
+          "Weight": 0.7
+        }
+      ]
+    },
+    "StudentID": 12345,
+    "Name": "Joseph",
+    "Course": "Computing",
+    "EnrolmentYear": 2021,
+    "CurrentYearOfStudy": 2
+  }
+}

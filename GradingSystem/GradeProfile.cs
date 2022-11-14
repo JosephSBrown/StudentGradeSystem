@@ -11,13 +11,17 @@ namespace GradingSystem
         public static void calcAvg(Dictionary<int, Student> students, string searchTerm)
         {
 
-            foreach (KeyValuePair<int, Student> s in students)
+            if (students.ContainsKey(Convert.ToInt32(searchTerm)))
             {
-                if (students.ContainsKey(Convert.ToInt32(searchTerm)))
+                foreach (KeyValuePair<int, Student> s in students)
                 {
                     List < Grade > sortedGrades = s.Value.Grading.Grades.OrderBy(o => o.Module).ToList();
-                    float total = sortedGrades.Sum(sg => (sg.Mark * sg.Weight) / sortedGrades.Count());
-                    Console.WriteLine($"Total Mark Average: {total}");
+                    float marktotal = sortedGrades.Sum(sg => sg.Mark);
+                    float weighttotal = sortedGrades.Sum(sg => sg.Weight);
+                    float total = (marktotal * weighttotal) / sortedGrades.Count();
+                    Console.WriteLine(@$"Total Mark Average: {total}
+
+");
                 }
             }
 

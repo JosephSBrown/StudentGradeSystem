@@ -71,13 +71,9 @@ Please Choose an Option Below...
 
         public void exit() 
         {
-            string json = JsonConvert.SerializeObject(students, Formatting.Indented);
+            //string json = JsonConvert.SerializeObject(students, Formatting.Indented);
 
-            using (StreamWriter file = File.CreateText(@"students.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, json);
-            }
+            //System.IO.File.WriteAllText("students.json", json);
 
             Console.WriteLine("Saving...");
             Environment.Exit(0);
@@ -206,7 +202,7 @@ Press Space to Search for a Specific Student's Grades...");
 
             foreach (KeyValuePair<int, Student> s in students)
             {
-                if (default(KeyValuePair<int, Student>).Equals(searchTerm))
+                if (students.ContainsKey(Convert.ToInt32(searchTerm)))
                 {
                     foreach (Grade g in s.Value.Grading.Grades)
                     {
@@ -258,12 +254,16 @@ Press Space to Search Again for a Specific Student's Grades...");
 
             string searchTerm = Console.ReadLine();
 
-            if (default(KeyValuePair<int, Student>).Equals(searchTerm))
+            Console.Clear();
+
+            if (students.ContainsKey(Convert.ToInt32(searchTerm)))
             {
                 Console.Write($@"---- REPORT CARD ----
 Student Name: {students[Convert.ToInt32(searchTerm)].Name}
+Student Course: {students[Convert.ToInt32(searchTerm)].Course}
 Current Year: {students[Convert.ToInt32(searchTerm)].CurrentYearOfStudy}
 Year of Enrolment: {students[Convert.ToInt32(searchTerm)].EnrolmentYear}
+
 ");
                 GradeProfile.calcAvg(students, searchTerm);
 
@@ -277,7 +277,7 @@ Year of Enrolment: {students[Convert.ToInt32(searchTerm)].EnrolmentYear}
 
                 foreach (KeyValuePair<int, Student> s in students)
                 {
-                    if (default(KeyValuePair<int, Student>).Equals(searchTerm))
+                    if (students.ContainsKey(Convert.ToInt32(searchTerm)))
                     {
                         foreach (Grade g in s.Value.Grading.Grades)
                         {
@@ -286,6 +286,22 @@ Year of Enrolment: {students[Convert.ToInt32(searchTerm)].EnrolmentYear}
 
                     }
                 }
+
+                foreach (DataColumn col in reportT.Columns)
+                {
+                    Console.Write("{0,-14}", col.ColumnName);
+                }
+                Console.WriteLine();
+
+                foreach (DataRow r in reportT.Rows)
+                {
+                    foreach (DataColumn col in reportT.Columns)
+                    {
+                        Console.Write("{0,-14}", r[col]);
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
 
                 Console.WriteLine($"Press Enter to Return...");
 
