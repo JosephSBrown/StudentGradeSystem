@@ -193,6 +193,13 @@ Press Space to Search for a Specific Student's Grades...");
 
             string searchTerm = Console.ReadLine();
 
+            Console.Clear();
+
+            Console.WriteLine($@"Name: {students[Convert.ToInt32(searchTerm)].Name}
+Course: {students[Convert.ToInt32(searchTerm)].Course}
+Current: {students[Convert.ToInt32(searchTerm)].CurrentYearOfStudy}
+");
+
             DataTable gradet = new DataTable();
             gradet.Columns.Add("Year", typeof(int));
             gradet.Columns.Add("Module", typeof(string));
@@ -266,6 +273,8 @@ Year of Enrolment: {students[Convert.ToInt32(searchTerm)].EnrolmentYear}
 
 ");
                 GradeProfile.calcAvg(students, searchTerm);
+
+                GradeProfile.calcIndividualAvg(students, searchTerm);
 
                 DataTable reportT = new DataTable();
                 reportT.Columns.Add("Year", typeof(int));
