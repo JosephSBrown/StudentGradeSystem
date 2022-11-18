@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using Newtonsoft.Json;
 using System.IO;
+using System.Threading;
 using System.Text;
 
 namespace GradingSystem
@@ -10,25 +11,31 @@ namespace GradingSystem
     class App
     {
 
-        private Dictionary<int, Student> students = new Dictionary<int, Student>();
+        private Dictionary<int, Student> students;
 
         public bool menu()
         {
 
-            //Console.Write("Attempting to Load Data...");
-            //if (File.Exists(@"students.json"))
-            //{
-            //    string studentList;
-            //    using (StreamReader dataread = new StreamReader(@"students.json", Encoding.Default))
-            //    {
-            //        studentList = dataread.ReadToEnd();
-            //    }
-            //    students = JsonConvert.DeserializeObject<Dictionary<int, Student>>(studentList);
-            //}
-            //else 
-            //{
-            //    students = new Dictionary<int, Student>();
-            //}
+            Console.WriteLine("Loading File, Extracting Data From JSON...");
+
+            try
+            {
+                string fromFile;
+                using (StreamReader reader = new StreamReader(@"../../../students.json", Encoding.Default))
+                {
+                    fromFile = reader.ReadToEnd();
+                }
+                students = JsonConvert.DeserializeObject<Dictionary<int, Student>>(fromFile);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to Load File... Creating New Dataset...");
+                students = new Dictionary<int, Student>();
+                Thread.Sleep(5000);
+            }
+
+
 
             Console.Clear();
             Console.WriteLine(@$"Welcome to Student Grading System
@@ -71,11 +78,15 @@ Please Choose an Option Below...
 
         public void exit() 
         {
-            //string json = JsonConvert.SerializeObject(students, Formatting.Indented);
-
-            //System.IO.File.WriteAllText("students.json", json);
-
             Console.WriteLine("Saving...");
+            //string fromFile;
+            //using (StreamWriter writer = File.CreateText(jsonfile))
+            //{
+            //    JsonSerializer write = new JsonSerializer();
+            //    write.Formatting = Formatting.Indented;
+            //    write.Serialize(writer, students);
+            //}
+
             Environment.Exit(0);
         }
 

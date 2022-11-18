@@ -1,0 +1,20 @@
+{
+  "12345": {
+    "Grading": {
+      "Grades": [
+        {
+          "Year": 2021,
+          "Module": "Object Oriented Programming",
+          "Assignment": 10,
+          "Mark": 70.0,
+          "Weight": 0.7
+        }
+      ]
+    },
+    "StudentID": 12345,
+    "Name": "Joseph",
+    "Course": "Computing",
+    "EnrolmentYear": 2021,
+    "CurrentYearOfStudy": 2
+  }
+}
