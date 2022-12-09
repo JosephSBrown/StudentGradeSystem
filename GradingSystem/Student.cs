@@ -3,16 +3,18 @@ using System.Collections.Generic;
 
 namespace GradingSystem
 {
+	//Start Student Class
 	class Student
 	{
-		public int StudentID { get; set; }
-		public string Name { get; set; }
-		public string Course { get; set; }
-		public int EnrolmentYear { get; set; }
-		public int CurrentYearOfStudy { get; set; }
-		public GradeProfile Grading = new GradeProfile();
+		public int StudentID { get; set; }  //Get and Set the Student ID Field of Object
+		public string Name { get; set; }        //Get and Set the Name Field of Object
+		public string Course { get; set; }      //Get and Set the Course Field of Object
+		public int EnrolmentYear { get; set; }      //Get and Set the Enrolment Year Field of Object
+		public int CurrentYearOfStudy { get; set; }     //Get and Set the Current Year of Study Field of Object
+		public GradeProfile Grading = new GradeProfile();       //Create a New Instance of GradeProfile
 
-		public Student(int sid, string name, string course ,int enrol, int cyos)
+		//Set the Properties of the new Student when called
+		public Student(int sid, string name, string course ,int enrol, int cyos)        //Parameters equivalent to the body, Use the Parameters to Set the new Student
 		{
 
 			StudentID = sid;
